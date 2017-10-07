@@ -38,7 +38,7 @@ def hello_user():
     # # a key, redirect them to /handle-key.
     # g = Gather(numDigits=1, action="/handle-key", method="POST")
     # g.say("To speak to a real monkey, press 1. Press any other key to start over.")
-    # resp.append(g)
+    resp.append(g)
 
     return str(resp)
 
