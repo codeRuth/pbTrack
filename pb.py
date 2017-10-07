@@ -18,20 +18,11 @@ def hello_user():
     from_number = request.values.get('To', None)
     print type(from_number)
     resp = VoiceResponse()
-    resp.say("Hello " + from_number)
-    print("Hello " + from_number)
     for x in database.get_users():
         if str(x['phone']) == str(from_number):
-            print "Hello " + str(x['name'])
             resp.say("Hello " + str(x['name']))
-            # caller = x['name']
-        # else:
-        #     caller = "Anonymous"
-
-
-    # Greet the caller by name
-    # resp.say("Hello " + from_number)
     resp.say("Are you available for the delivery today ?")
+
     # handle the yes or no command
     #
     # g = Gather(numDigits=1, action="/handle-yn", method="POST")
