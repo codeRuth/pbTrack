@@ -46,7 +46,7 @@ def handle_yn():
         resp.say("You have said No.", voice='alice')
 
         g = Gather(numDigits=1, action="/handle-time", method="POST")
-        g.say("Press 1 for 8 AM to 12 PM, Press 2 for 12 AM to 4 PM, Press 3 for 4 AM to 8 PM", voice='alice')
+        g.say("Press 1 for 8 AM to 12 PM, Press 2 for 12 PM to 4 PM, Press 3 for 4 PM to 8 PM", voice='alice')
         resp.append(g)
 
         return str(resp)
@@ -70,20 +70,24 @@ def handle_time():
             "pno": str(from_number)
         }
 
+        resp.say("Thanks", voice='alice')
+
         database.update(json.dumps(args))
         return str(resp)
 
     elif digit_pressed == "2":
         # 12 AM to 4 PM.
         resp = VoiceResponse()
-        resp.say("12 AM to 4 PM", voice='alice')
+        resp.say("12 PM to 4 PM", voice='alice')
 
         args = {
             'yes': 'False',
             "no": 'True',
-            'del_time': '12 AM to 4 PM',
+            'del_time': '12 PM to 4 PM',
             "pno": str(from_number)
         }
+
+        resp.say("Thanks", voice='alice')
 
         database.update(json.dumps(args))
         return str(resp)
@@ -91,14 +95,16 @@ def handle_time():
     elif digit_pressed == "3":
         # 4 AM to 8 PM.
         resp = VoiceResponse()
-        resp.say("4 AM to 8 PM", voice='alice')
+        resp.say("4 PM to 8 PM", voice='alice')
 
         args = {
             'yes': 'False',
             "no": 'True',
-            'del_time': '4 AM to 8 PM',
+            'del_time': '4 PM to 8 PM',
             "pno": str(from_number)
         }
+
+        resp.say("Thanks", voice='alice')
 
         database.update(json.dumps(args))
         return str(resp)

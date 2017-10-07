@@ -29,7 +29,9 @@ class Call(threading.Thread):
 if __name__ == '__main__':
     c = Call("+918660420224")
     c1 = Call("+917411924458")
+    c2 = Call("+919686832383")
     c.start()
     c1.start()
+    c2.start()
     # make_call("+918660420224")
     # make_call("+917411924458")
