@@ -1,21 +1,31 @@
+from __future__ import with_statement  # Only necessary for Python 2.5
 from flask import Flask, request, redirect
 from twilio.twiml.voice_response import VoiceResponse, Gather
-
 import database
-import make_call
 
 app = Flask(__name__)
+
+callers = {
+    "+14158675309": "Curious George",
+    "+14158675310": "Boots",
+    "+14158675311": "Virgil",
+    "+14158675312": "Marcel"
+}
 
 
 @app.route("/outbound", methods=['GET', 'POST'])
 def hello_user():
-    from_number = make_call.get_current_call()
-    resp = VoiceResponse()
-    for x in database.get_users():
-        if str(from_number) == x['phone']:
-            resp.say("Hello " + x['name'])
+    from_number = request.values.get('From', None)
+    # caller = str
+    # for x in database.get_users():
+    #     if from_number == x['phone']:
+    #         caller = x['name']
+    #     else:
+    #         caller = "Anonymous"
 
-    # resp.say("Hello " + caller + from_number)
+    resp = VoiceResponse()
+    # Greet the caller by name
+    resp.say("Hello " + from_number)
     resp.say("Are you available for the delivery today ?")
     # handle the yes or no command
     #
