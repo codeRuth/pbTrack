@@ -65,6 +65,9 @@ def update(args):
 
 
 def get_users():
+    client = MongoClient('mongodb://bidhuri:jaisiaram1@ds113445.mlab.com:13445/pbcall')
+    db = client.get_database()
+
     _ = list()
     for doc in db.delivery.find({}, {"_id": 0, "name": 1, "phone": 1}):
         _.append(doc)
@@ -73,4 +76,5 @@ def get_users():
 if __name__ == '__main__':
     for x in get_users():
         print type(str(x['phone']))
+    get_users()
     #print get_users()[0]['phone']

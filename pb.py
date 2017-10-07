@@ -16,13 +16,14 @@ app = Flask(__name__)
 @app.route("/outbound", methods=['GET', 'POST'])
 def hello_user():
     from_number = request.values.get('To', None)
+    print type(from_number)
     resp = VoiceResponse()
     resp.say("Hello " + from_number)
     print("Hello " + from_number)
     for x in database.get_users():
         if str(x['phone']) == str(from_number):
             print "Hello " + str(x['name'])
-            # resp.say("Hello " + str(x['name']))
+            resp.say("Hello " + str(x['name']))
             # caller = x['name']
         # else:
         #     caller = "Anonymous"
