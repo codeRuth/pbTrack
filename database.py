@@ -72,6 +72,5 @@ def get_users():
 
 if __name__ == '__main__':
     for x in get_users():
-        if make_call.get_current_call() == x['phone']:
-            print x['phone']
+        print type(str(x['phone']))
     #print get_users()[0]['phone']
