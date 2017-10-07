@@ -11,7 +11,3 @@ def hello_monkey():
     resp.say("Hello Monkey")
 
     return str(resp)
-
-
-if __name__ == "__main__":
-    app.run(debug=True)
