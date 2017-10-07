@@ -12,10 +12,8 @@ def hello_user():
     from_number = make_call.get_current_call()
     caller = str
     for x in database.get_users():
-        if from_number == x['phone']:
+        if str(from_number) == x['phone']:
             caller = x['name']
-        else:
-            caller = "Anonymous"
 
     resp = VoiceResponse()
     # Greet the caller by name
