@@ -2,6 +2,7 @@ from __future__ import with_statement  # Only necessary for Python 2.5
 from flask import Flask, request, redirect
 from twilio.twiml.voice_response import VoiceResponse, Gather
 import database
+import json
 
 app = Flask(__name__)
 
@@ -12,10 +13,11 @@ app = Flask(__name__)
 #     "+14158675312": "Marcel"
 # }
 
+from_number = request.values.get('To', None)
 
 @app.route("/outbound", methods=['GET', 'POST'])
 def hello_user():
-    from_number = request.values.get('To', None)
+
     print type(from_number)
     resp = VoiceResponse()
     for x in database.get_users():
@@ -35,15 +37,17 @@ def handle_yn():
 
     if digit_pressed == "1":
         resp = VoiceResponse()
-        resp.say("You have said Yes")
-        g = Gather(numDigits=1, action="/handle-time", method="POST")
-        g.say("Press 1 for 8 AM to 12 PM, Press 1 for 12 AM to 4 PM, Press 1 for 4 AM to 8 PM", voice='alice')
-        resp.append(g)
+        resp.say("You have said Yes", voice='alice')
         return str(resp)
 
     elif digit_pressed == "2":
         resp = VoiceResponse()
         resp.say("You have said No.", voice='alice')
+
+        g = Gather(numDigits=1, action="/handle-time", method="POST")
+        g.say("Press 1 for 8 AM to 12 PM, Press 2 for 12 AM to 4 PM, Press 3 for 4 AM to 8 PM", voice='alice')
+        resp.append(g)
+
         return str(resp)
     # If the caller pressed anything but 1, redirect them to the homepage.
     else:
@@ -52,26 +56,51 @@ def handle_yn():
 
 @app.route("/handle-time", methods=['GET', 'POST'])
 def handle_time():
-    # Get the digit pressed by the user
     digit_pressed = request.values.get('Digits', None)
 
     if digit_pressed == "1":
         resp = VoiceResponse()
-        resp.say("8 AM to 12 PM")
+        resp.say("8 AM to 12 PM", voice='alice')
+
+        args = {
+            'yes': 'False',
+            "no": 'True',
+            'del_time': '8 AM to 12 PM',
+            "pno": str(from_number)
+        }
+
+        database.update(json.dumps(args))
         return str(resp)
 
     elif digit_pressed == "2":
         # 12 AM to 4 PM.
         resp = VoiceResponse()
-        resp.say("12 AM to 4 PM")
+        resp.say("12 AM to 4 PM", voice='alice')
+
+        args = {
+            'yes': 'False',
+            "no": 'True',
+            'del_time': '12 AM to 4 PM',
+            "pno": str(from_number)
+        }
+
+        database.update(json.dumps(args))
         return str(resp)
 
     elif digit_pressed == "3":
         # 4 AM to 8 PM.
         resp = VoiceResponse()
-        resp.say("4 AM to 8 PM")
+        resp.say("4 AM to 8 PM", voice='alice')
+
+        args = {
+            'yes': 'False',
+            "no": 'True',
+            'del_time': '4 AM to 8 PM',
+            "pno": str(from_number)
+        }
+
+        database.update(json.dumps(args))
         return str(resp)
 
-    # If the caller pressed anything but 1, redirect them to the homepage.
     else:
         return redirect("/")
