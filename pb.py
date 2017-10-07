@@ -5,12 +5,12 @@ import database
 
 app = Flask(__name__)
 
-callers = {
-    "+14158675309": "Curious George",
-    "+14158675310": "Boots",
-    "+14158675311": "Virgil",
-    "+14158675312": "Marcel"
-}
+# callers = {
+#     "+14158675309": "Curious George",
+#     "+14158675310": "Boots",
+#     "+14158675311": "Virgil",
+#     "+14158675312": "Marcel"
+# }
 
 
 @app.route("/outbound", methods=['GET', 'POST'])
@@ -18,9 +18,11 @@ def hello_user():
     from_number = request.values.get('To', None)
     resp = VoiceResponse()
     resp.say("Hello " + from_number)
+    print("Hello " + from_number)
     for x in database.get_users():
         if str(x['phone']) == str(from_number):
-            resp.say("Hello " + str(x['name']))
+            print "Hello " + str(x['name'])
+            # resp.say("Hello " + str(x['name']))
             # caller = x['name']
         # else:
         #     caller = "Anonymous"
