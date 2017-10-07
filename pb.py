@@ -25,7 +25,7 @@ def hello_user():
 
     # handle the yes or no command
     #
-    g = Gather(numDigits=1, action="/handle-yn", method="POST")
+    g = Gather(numDigits=1, action="/handle-yn", timeout=1, method="POST",)
     g.say("If Yes, Press 1, if No Press 2.")
 
     #
@@ -49,17 +49,16 @@ def handle_yn():
     digit_pressed = request.values.get('Digits', None)
 
     if digit_pressed == "1":
-        # g = Gather(numDigits=1, action="/handle-time", method="POST")
-        #
         resp = VoiceResponse()
-        # resp.dial("+13105551212")
-
-        resp.say("You have said yes")
+        resp.say("You have said Yes")
+        g = Gather(numDigits=1, action="/handle-time", method="POST")
+        g.say("Press 1 for 8 AM to 12 PM, Press 1 for 12 AM to 4 PM, Press 1 for 4 AM to 8 PM")
+        resp.append(g)
         return str(resp)
 
     elif digit_pressed == "2":
         resp = VoiceResponse()
-        resp.say("You have said no")
+        resp.say("You have said No, Gaanduuuuuuuu, pakistan maaa ki bhosda")
         return str(resp)
 
     # If the caller pressed anything but 1, redirect them to the homepage.
@@ -75,14 +74,14 @@ def handle_time():
     if digit_pressed == "1":
         # 8 AM to 12 PM
         resp = VoiceResponse()
-        resp.dial("+13105551212")
+        # resp.dial("+13105551212")
         resp.say("The call failed, or the remote party hung up. Goodbye.")
         return str(resp)
 
     elif digit_pressed == "2":
         # 12 AM to 4 PM.
         resp = VoiceResponse()
-        resp.dial("+13105551212")
+        # resp.dial("+13105551212")
         resp.say("The call failed, or the remote party hung up. Goodbye.")
         return str(resp)
 
@@ -90,7 +89,7 @@ def handle_time():
 
         # 4 AM to 8 PM.
         resp = VoiceResponse()
-        resp.dial("+13105551212")
+        # resp.dial("+13105551212")
         resp.say("The call failed, or the remote party hung up. Goodbye.")
         return str(resp)
 
