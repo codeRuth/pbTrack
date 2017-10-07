@@ -1,19 +1,13 @@
-from __future__ import with_statement  # Only necessary for Python 2.5
 from flask import Flask, request, redirect
 from twilio.twiml.voice_response import VoiceResponse, Gather
+
 import database
 import json
 
 app = Flask(__name__)
 
-# callers = {
-#     "+14158675309": "Curious George",
-#     "+14158675310": "Boots",
-#     "+14158675311": "Virgil",
-#     "+14158675312": "Marcel"
-# }
-
 from_number = None
+
 
 @app.route("/outbound", methods=['GET', 'POST'])
 def hello_user():
@@ -25,7 +19,7 @@ def hello_user():
         if str(x['phone']) == str(from_number):
             resp.say("Hello " + str(x['name']), voice='alice')
     resp.say("Are you available for the delivery today ?", voice='alice')
-    g = Gather(numDigits=1, action="/handle-yn", timeout=2, method="POST",)
+    g = Gather(numDigits=1, action="/handle-yn", timeout=2, method="POST", )
     g.say("If Yes, Press 1, if No Press 2.", voice='alice')
     resp.append(g)
 
@@ -50,7 +44,6 @@ def handle_yn():
         resp.append(g)
 
         return str(resp)
-    # If the caller pressed anything but 1, redirect them to the homepage.
     else:
         return redirect("/")
 
