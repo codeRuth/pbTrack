@@ -15,7 +15,7 @@ callers = {
 
 @app.route("/outbound", methods=['GET', 'POST'])
 def hello_user():
-    from_number = request.values.get('From', None)
+    from_number = request.values.get('To', None)
     # caller = str
     # for x in database.get_users():
     #     if from_number == x['phone']:
