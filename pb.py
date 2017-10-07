@@ -17,6 +17,7 @@ callers = {
 def hello_user():
     from_number = request.values.get('To', None)
     resp = VoiceResponse()
+    resp.say("Hello " + from_number)
     for x in database.get_users():
         if x['phone'] == from_number:
             resp.say("Hello " + x['name'])
