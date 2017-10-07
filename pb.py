@@ -16,6 +16,7 @@ callers = {
 @app.route("/outbound", methods=['GET', 'POST'])
 def hello_user():
     from_number = request.values.get('To', None)
+    print from_number
     caller = str
     for x in database.get_users():
         if from_number == x['phone']:
@@ -25,7 +26,7 @@ def hello_user():
 
     resp = VoiceResponse()
     # Greet the caller by name
-    resp.say("Hello " + caller)
+    resp.say("Hello " + caller + from_number)
     resp.say("Are you available for the delivery today ?")
     # handle the yes or no command
     #
