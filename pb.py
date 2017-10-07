@@ -25,8 +25,9 @@ def hello_user():
 
     # handle the yes or no command
     #
-    # g = Gather(numDigits=1, action="/handle-yn", method="POST")
-    # g.say("If Yes, Press 1, if No Press 2.")
+    g = Gather(numDigits=1, action="/handle-yn", method="POST")
+    g.say("If Yes, Press 1, if No Press 2.")
+
     #
     # resp.say("Thanks for Your Response, Keep shopping with Shopping with us.")
     #
@@ -48,18 +49,17 @@ def handle_yn():
     digit_pressed = request.values.get('Digits', None)
 
     if digit_pressed == "1":
-        g = Gather(numDigits=1, action="/handle-time", method="POST")
-
+        # g = Gather(numDigits=1, action="/handle-time", method="POST")
+        #
         resp = VoiceResponse()
-        resp.dial("+13105551212")
+        # resp.dial("+13105551212")
 
-        resp.say("The call failed, or the remote party hung up. Goodbye.")
+        resp.say("You have said yes")
         return str(resp)
 
     elif digit_pressed == "2":
         resp = VoiceResponse()
-        resp.dial("+13105551212")
-        resp.say("The call failed, or the remote party hung up. Goodbye.")
+        resp.say("You have said no")
         return str(resp)
 
     # If the caller pressed anything but 1, redirect them to the homepage.
