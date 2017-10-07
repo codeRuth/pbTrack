@@ -21,23 +21,9 @@ def hello_user():
     for x in database.get_users():
         if str(x['phone']) == str(from_number):
             resp.say("Hello " + str(x['name']), voice='alice')
-    resp.say("Are you available for the delivery today ?")
-
-    # handle the yes or no command
-    #
-    g = Gather(numDigits=1, action="/handle-yn", timeout=1, method="POST",)
-    g.say("If Yes, Press 1, if No Press 2.")
-
-    #
-    # resp.say("Thanks for Your Response, Keep shopping with Shopping with us.")
-    #
-    # # Play an mp3
-    # # resp.play("http://demo.twilio.com/hellomonkey/monkey.mp3")
-    #
-    # # Say a command, and listen for the caller to press a key. When they press
-    # # a key, redirect them to /handle-key.
-    # g = Gather(numDigits=1, action="/handle-key", method="POST")
-    # g.say("To speak to a real monkey, press 1. Press any other key to start over.")
+    resp.say("Are you available for the delivery today ?", voice='alice')
+    g = Gather(numDigits=1, action="/handle-yn", timeout=2, method="POST",)
+    g.say("If Yes, Press 1, if No Press 2.", voice='alice')
     resp.append(g)
 
     return str(resp)
@@ -45,22 +31,20 @@ def hello_user():
 
 @app.route("/handle-yn", methods=['GET', 'POST'])
 def handle_yn():
-    # Get the digit pressed by the user
     digit_pressed = request.values.get('Digits', None)
 
     if digit_pressed == "1":
         resp = VoiceResponse()
         resp.say("You have said Yes")
         g = Gather(numDigits=1, action="/handle-time", method="POST")
-        g.say("Press 1 for 8 AM to 12 PM, Press 1 for 12 AM to 4 PM, Press 1 for 4 AM to 8 PM")
+        g.say("Press 1 for 8 AM to 12 PM, Press 1 for 12 AM to 4 PM, Press 1 for 4 AM to 8 PM", voice='alice')
         resp.append(g)
         return str(resp)
 
     elif digit_pressed == "2":
         resp = VoiceResponse()
-        resp.say("You have said No, Gaanduuuuuuuu, pakistan maaa ki bhosda")
+        resp.say("You have said No.", voice='alice')
         return str(resp)
-
     # If the caller pressed anything but 1, redirect them to the homepage.
     else:
         return redirect("/")
@@ -72,25 +56,20 @@ def handle_time():
     digit_pressed = request.values.get('Digits', None)
 
     if digit_pressed == "1":
-        # 8 AM to 12 PM
         resp = VoiceResponse()
-        # resp.dial("+13105551212")
-        resp.say("The call failed, or the remote party hung up. Goodbye.")
+        resp.say("8 AM to 12 PM")
         return str(resp)
 
     elif digit_pressed == "2":
         # 12 AM to 4 PM.
         resp = VoiceResponse()
-        # resp.dial("+13105551212")
-        resp.say("The call failed, or the remote party hung up. Goodbye.")
+        resp.say("12 AM to 4 PM")
         return str(resp)
 
     elif digit_pressed == "3":
-
         # 4 AM to 8 PM.
         resp = VoiceResponse()
-        # resp.dial("+13105551212")
-        resp.say("The call failed, or the remote party hung up. Goodbye.")
+        resp.say("4 AM to 8 PM")
         return str(resp)
 
     # If the caller pressed anything but 1, redirect them to the homepage.
