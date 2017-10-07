@@ -4,7 +4,7 @@ from twilio.twiml.voice_response import VoiceResponse
 app = Flask(__name__)
 
 
-@app.route("/", methods=['GET', 'POST'])
+@app.route("/getinput", methods=['GET', 'POST'])
 def hello_monkey():
     """Respond to incoming requests."""
     resp = VoiceResponse()
