@@ -13,11 +13,12 @@ app = Flask(__name__)
 #     "+14158675312": "Marcel"
 # }
 
-from_number = request.values.get('To', None)
+from_number = None
 
 @app.route("/outbound", methods=['GET', 'POST'])
 def hello_user():
-
+    global from_number
+    from_number = request.values.get('To', None)
     print type(from_number)
     resp = VoiceResponse()
     for x in database.get_users():
