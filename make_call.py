@@ -12,4 +12,6 @@ call = client.calls.create(
     url="https://pbtrack.herokuapp.com/outbound"
 )
 
-print(call.answered_by)
+
+def get_current_call():
+    return client.calls.list()[-1].to

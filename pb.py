@@ -1,28 +1,21 @@
-from __future__ import with_statement  # Only necessary for Python 2.5
 from flask import Flask, request, redirect
 from twilio.twiml.voice_response import VoiceResponse, Gather
+
 import database
+import make_call
 
 app = Flask(__name__)
-
-callers = {
-    "+14158675309": "Curious George",
-    "+14158675310": "Boots",
-    "+14158675311": "Virgil",
-    "+14158675312": "Marcel"
-}
 
 
 @app.route("/outbound", methods=['GET', 'POST'])
 def hello_user():
-    from_number = request.values
-    print from_number
-    # caller = str
-    # for x in database.get_users():
-    #     if from_number == x['phone']:
-    #         caller = x['name']
-    #     else:
-    #         caller = "Anonymous"
+    from_number = make_call.get_current_call()
+    caller = str
+    for x in database.get_users():
+        if from_number == x['phone']:
+            caller = x['name']
+        else:
+            caller = "Anonymous"
 
     resp = VoiceResponse()
     # Greet the caller by name
