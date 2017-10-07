@@ -15,14 +15,14 @@ callers = {
 
 @app.route("/outbound", methods=['GET', 'POST'])
 def hello_user():
-    from_number = request.values.get('To', None)
+    from_number = request.values
     print from_number
-    caller = str
-    for x in database.get_users():
-        if from_number == x['phone']:
-            caller = x['name']
-        else:
-            caller = "Anonymous"
+    # caller = str
+    # for x in database.get_users():
+    #     if from_number == x['phone']:
+    #         caller = x['name']
+    #     else:
+    #         caller = "Anonymous"
 
     resp = VoiceResponse()
     # Greet the caller by name
