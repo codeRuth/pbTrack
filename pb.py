@@ -20,7 +20,7 @@ def hello_user():
     resp = VoiceResponse()
     for x in database.get_users():
         if str(x['phone']) == str(from_number):
-            resp.say("Hello " + str(x['name']))
+            resp.say("Hello " + str(x['name']), voice='alice')
     resp.say("Are you available for the delivery today ?")
 
     # handle the yes or no command
