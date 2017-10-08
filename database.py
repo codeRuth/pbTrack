@@ -30,6 +30,7 @@ def get_users():
         _.append(doc)
     return _
 
+
 def get_data():
     client = MongoClient(config.MONGO_URL)
     db = client.get_database()
