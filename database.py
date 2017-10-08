@@ -29,3 +29,12 @@ def get_users():
     for doc in db.delivery.find({}, {"_id": 0, "name": 1, "phone": 1}):
         _.append(doc)
     return _
+
+def get_data():
+    client = MongoClient(config.MONGO_URL)
+    db = client.get_database()
+
+    _ = list()
+    for doc in db.delivery.find({}, {"_id": 0}):
+        _.append(doc)
+    return _

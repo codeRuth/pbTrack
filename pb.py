@@ -104,3 +104,7 @@ def handle_time():
 
     else:
         return redirect("/")
+
+@app.route("/getlist", methods=['GET', 'POST'])
+def get_list():
+    json.dumps(database.get_data())
