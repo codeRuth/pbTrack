@@ -108,4 +108,6 @@ def handle_time():
 
 @app.route("/get-list", methods=['GET'])
 def get_list():
-    return json.dumps(database.get_data())
+    newObj = dict({'results': None})
+    newObj['results'] = database.get_data()
+    return json.dumps(newObj)
