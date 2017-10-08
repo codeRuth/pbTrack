@@ -12,7 +12,7 @@ class Call(threading.Thread):
     def make_call(self):
         call = self.client.calls.create(
             to=self.number,
-            from_= config.TWILIO_NUMBER,
+            from_=config.TWILIO_NUMBER,
             url="https://pbtrack.herokuapp.com/outbound"
         )
         return call

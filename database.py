@@ -8,16 +8,13 @@ def update(args):
     db = client.get_database()
 
     inp = json.loads(args)
+    yes, no, del_time, pno = inp['yes'], inp['no'], inp['del_time'], inp['pno']
 
-    yes = inp['yes']
-    no = inp['no']
-    del_time = inp['del_time']
-    pno = inp['pno']
-    if yes == 'True':
+    if yes == 'true':
         pass
-    elif no == 'True' and yes == 'False':
-        query = {'Phone': pno}
-        db.delivery.update(query, {'$set': {'del_time': del_time}})
+    elif no == 'true' and yes == 'false':
+        query = {'phone': pno}
+        db.delivery.update(query, {'$set': {'del_time': del_time, 'availability': 'no'}})
     client.close()
 
 
@@ -28,6 +25,7 @@ def get_users():
     _ = list()
     for doc in db.delivery.find({}, {"_id": 0, "name": 1, "phone": 1}):
         _.append(doc)
+    client.close()
     return _
 
 
@@ -38,4 +36,5 @@ def get_data():
     _ = list()
     for doc in db.delivery.find({}, {"_id": 0}):
         _.append(doc)
+    client.close()
     return _

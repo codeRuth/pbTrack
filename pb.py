@@ -5,6 +5,8 @@ import database
 import json
 from make_call import Call
 
+import geo
+
 app = Flask(__name__)
 
 from_number = None
@@ -34,6 +36,7 @@ def handle_yn():
     if digit_pressed == "1":
         resp = VoiceResponse()
         resp.say("You have said Yes", voice='alice')
+
         return str(resp)
 
     elif digit_pressed == "2":
@@ -58,8 +61,8 @@ def handle_time():
         resp.say("8 AM to 12 PM", voice='alice')
 
         args = {
-            'yes': 'False',
-            "no": 'True',
+            'yes': 'false',
+            "no": 'true',
             'del_time': '8 AM to 12 PM',
             "pno": str(from_number)
         }
@@ -75,8 +78,8 @@ def handle_time():
         resp.say("12 PM to 4 PM", voice='alice')
 
         args = {
-            'yes': 'False',
-            "no": 'True',
+            'yes': 'false',
+            "no": 'true',
             'del_time': '12 PM to 4 PM',
             "pno": str(from_number)
         }
@@ -92,13 +95,13 @@ def handle_time():
         resp.say("4 PM to 8 PM", voice='alice')
 
         args = {
-            'yes': 'False',
-            "no": 'True',
+            'yes': 'false',
+            "no": 'true',
             'del_time': '4 PM to 8 PM',
             "pno": str(from_number)
         }
 
-        resp.say("Thanks", voice='alice')
+        resp.say("Thanks.", voice='alice')
 
         database.update(json.dumps(args))
         return str(resp)
@@ -109,16 +112,17 @@ def handle_time():
 
 @app.route("/get-list", methods=['GET'])
 def get_list():
-    newObj = dict({'results': None})
-    newObj['results'] = database.get_data()
-    return json.dumps(newObj)
+    _ = dict({'results': None})
+    _['results'] = database.get_data()
+    return json.dumps(_)
 
-@app.route("/make-outbount-calls", methods=['GET'])
+
+@app.route("/make-outbound-calls", methods=['GET'])
 def make_outbound_calls():
     c = Call("+918660420224")
-    c1 = Call("+917411924458")
-    c2 = Call("+919686832383")
+    # c1 = Call("+917411924458")
+    # c2 = Call("+919686832383")
     c.start()
-    c1.start()
-    c2.start()
+    # c1.start()
+    # c2.start()
     return "true"
