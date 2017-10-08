@@ -42,8 +42,8 @@ def generate_access_token():
                       data={"grant_type": "client_credentials"})
     return json.loads(_.content)['access_token']
 
-
-if __name__ == "__main__":
-    # start="A-312, SVR Flora Apartments ,Kudlu Road , Somasundarapalya, Bengaluru, Karnataka"
-    print generate_access_token()
-    print coordinates("A-312, SVR Flora Apartments ,Kudlu Road , Somasundarapalya, Bengaluru, Karnataka")
+# #
+# if __name__ == "__main__":
+#     # start="A-312, SVR Flora Apartments ,Kudlu Road , Somasundarapalya, Bengaluru, Karnataka"
+#     # print generate_access_token()
+#     print coordinates("A-312, SVR Flora Apartments ,Kudlu Road , Somasundarapalya, Bengaluru, Karnataka")[0]

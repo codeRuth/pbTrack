@@ -21,7 +21,7 @@ def hello_user():
     for x in database.get_users():
         if str(x['phone']) == str(from_number):
             resp.say("Hello " + str(x['name']), voice='alice')
-    resp.say("Are you available for the delivery today ?", voice='alice')
+    resp.say("Are you available for the delivery Now ?", voice='alice')
     g = Gather(numDigits=1, action="/handle-yn", timeout=2, method="POST", )
     g.say("If Yes, Press 1, if No Press 2.", voice='alice')
     resp.append(g)
@@ -119,10 +119,12 @@ def get_list():
 
 @app.route("/make-outbound-calls", methods=['GET'])
 def make_outbound_calls():
-    c = Call("+918660420224")
+    for x in geo.coordinates("A-312, SVR Flora Apartments ,Kudlu Road , Somasundarapalya, Bengaluru, Karnataka"):
+        c = Call(str(x))
+        c.start()
     # c1 = Call("+917411924458")
     # c2 = Call("+919686832383")
-    c.start()
+    # c.start()
     # c1.start()
     # c2.start()
     return "true"
