@@ -3,6 +3,7 @@ from twilio.twiml.voice_response import VoiceResponse, Gather
 
 import database
 import json
+from make_call import Call
 
 app = Flask(__name__)
 
@@ -111,3 +112,13 @@ def get_list():
     newObj = dict({'results': None})
     newObj['results'] = database.get_data()
     return json.dumps(newObj)
+
+@app.route("/make-outbount-calls", methods=['GET'])
+def make_outbound_calls():
+    c = Call("+918660420224")
+    c1 = Call("+917411924458")
+    c2 = Call("+919686832383")
+    c.start()
+    c1.start()
+    c2.start()
+    return "true"
