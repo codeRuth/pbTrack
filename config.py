@@ -10,3 +10,5 @@ TOKEN_URL       = 'https://api.pitneybowes.com/oauth/token'
 
 PB_KEY    = "Cn4GXLgGDgAXpRHM7YzbTkHGYKS6UEbC"
 PB_SECRET = "QybpKXkkX495Nors"
+
+GOOGLE_MAPS_API = 'AIzaSyA7Wm72EPoS3VgNcCXFmkst69qq6sQzQS4'

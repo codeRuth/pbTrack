@@ -119,8 +119,9 @@ def get_list():
 
 @app.route("/make-outbound-calls", methods=['GET'])
 def make_outbound_calls():
-    # l = geo.coordinates("A-312, SVR Flora Apartments ,Kudlu Road , Somasundarapalya, Bengaluru, Karnataka")
-    for x in ['+918660420224', '+917411924458', '+919686832383']:
+    l = geo.coordinates("A-312, SVR Flora Apartments ,Kudlu Road , Somasundarapalya, Bengaluru, Karnataka")
+    print l
+    for x in l:
         c = Call(x)
         c.start()
     # c1 = Call("+917411924458")
