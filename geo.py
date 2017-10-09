@@ -31,7 +31,7 @@ def coordinates(start):
         distance_time = distance_time.json()
 
         if distance_time['distance'] < 7000 or distance_time['time'] < 15:
-            delivery.append(_['phone'])
+            delivery.append(str(_['phone']))
     return delivery
 
 
@@ -43,7 +43,7 @@ def generate_access_token():
     return json.loads(_.content)['access_token']
 
 # #
-# if __name__ == "__main__":
-#     # start="A-312, SVR Flora Apartments ,Kudlu Road , Somasundarapalya, Bengaluru, Karnataka"
-#     # print generate_access_token()
-#     print coordinates("A-312, SVR Flora Apartments ,Kudlu Road , Somasundarapalya, Bengaluru, Karnataka")[0]
+if __name__ == "__main__":
+    # start="A-312, SVR Flora Apartments ,Kudlu Road , Somasundarapalya, Bengaluru, Karnataka"
+    # print generate_access_token()
+    print coordinates("A-312, SVR Flora Apartments ,Kudlu Road , Somasundarapalya, Bengaluru, Karnataka")

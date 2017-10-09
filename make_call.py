@@ -21,10 +21,12 @@ class Call(threading.Thread):
         self.make_call()
 
 
-if __name__ == '__main__':
-    c = Call("+918660420224")
-    c1 = Call("+917411924458")
-    c2 = Call("+919686832383")
-    c.start()
-    c1.start()
-    c2.start()
+# if __name__ == '__main__':
+#     number = ['+918660420224', '+917411924458', '+919686832383']
+#     for x in number:
+#         c = Call(x)
+#         c.start()
+#     #c1 = Call("+917411924458")
+#     #c2 = Call("+919686832383")
+#     #c1.start()
+#     #c2.start()
